@@ -2,44 +2,46 @@
 
 namespace Blazored.Modal;
 
-public class ModalParameters : IEnumerable<KeyValuePair<string, object>>
+public class ModalParameters : IEnumerable<KeyValuePair<string, object?>>
 {
-    internal readonly Dictionary<string, object> Parameters;
+    internal readonly Dictionary<string, object?> Parameters = new();
 
-    public ModalParameters()
-    {
-        Parameters = new Dictionary<string, object>();
-    }
-
-    public ModalParameters Add(string parameterName, object value)
+    public ModalParameters Add(string parameterName, object? value)
     {
         Parameters[parameterName] = value;
         return this;
     }
 
-    public T Get<T>(string parameterName)
+    public T? Get<T>(string parameterName)
     {
-        if (Parameters.TryGetValue(parameterName, out var value))
+        if (!Parameters.TryGetValue(parameterName, out object? value))
         {
-            return (T)value;
+            return default;
         }
             
-        throw new KeyNotFoundException($"{parameterName} does not exist in modal parameters");
-    }
-
-    public T? TryGet<T>(string parameterName)
-    {
-        if (Parameters.TryGetValue(parameterName, out var value))
+        if (value is T val)
         {
-            return (T)value;
+            return val;
         }
 
         return default;
     }
 
-    public IEnumerator<KeyValuePair<string, object>> GetEnumerator() 
-        => Parameters.GetEnumerator();
+    public T? TryGet<T>(string parameterName)
+    {
+        if (!Parameters.TryGetValue(parameterName, out object? value))
+        {
+            return default;
+        }
+            
+        if (value is T val)
+        {
+            return val;
+        }
 
-    IEnumerator IEnumerable.GetEnumerator() 
-        => Parameters.GetEnumerator();
+        return default;
+    }
+
+    public IEnumerator<KeyValuePair<string, object?>> GetEnumerator() => Parameters.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()=> Parameters.GetEnumerator();
 }
