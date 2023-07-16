@@ -142,12 +142,7 @@ public partial class BlazoredModalInstance : IDisposable
             return Options.UseCustomLayout.Value;
         }
 
-        if (GlobalModalOptions.UseCustomLayout.HasValue)
-        {
-            return GlobalModalOptions.UseCustomLayout.Value;
-        }
-
-        return false;
+        return GlobalModalOptions.UseCustomLayout.HasValue && GlobalModalOptions.UseCustomLayout.Value;
     }
 
     private string SetPosition()
@@ -277,10 +272,7 @@ public partial class BlazoredModalInstance : IDisposable
         if (Options.HideHeader.HasValue)
             return Options.HideHeader.Value;
 
-        if (GlobalModalOptions.HideHeader.HasValue)
-            return GlobalModalOptions.HideHeader.Value;
-
-        return false;
+        return GlobalModalOptions.HideHeader.HasValue && GlobalModalOptions.HideHeader.Value;
     }
 
     private bool SetHideCloseButton()
@@ -288,10 +280,7 @@ public partial class BlazoredModalInstance : IDisposable
         if (Options.HideCloseButton.HasValue)
             return Options.HideCloseButton.Value;
 
-        if (GlobalModalOptions.HideCloseButton.HasValue)
-            return GlobalModalOptions.HideCloseButton.Value;
-
-        return false;
+        return GlobalModalOptions.HideCloseButton.HasValue && GlobalModalOptions.HideCloseButton.Value;
     }
 
     private bool SetDisableBackgroundCancel()
@@ -299,10 +288,7 @@ public partial class BlazoredModalInstance : IDisposable
         if (Options.DisableBackgroundCancel.HasValue)
             return Options.DisableBackgroundCancel.Value;
 
-        if (GlobalModalOptions.DisableBackgroundCancel.HasValue)
-            return GlobalModalOptions.DisableBackgroundCancel.Value;
-
-        return false;
+        return GlobalModalOptions.DisableBackgroundCancel.HasValue && GlobalModalOptions.DisableBackgroundCancel.Value;
     }
 
     private string SetOverlayCustomClass()
@@ -310,10 +296,7 @@ public partial class BlazoredModalInstance : IDisposable
         if (!string.IsNullOrWhiteSpace(Options.OverlayCustomClass))
             return Options.OverlayCustomClass;
 
-        if (!string.IsNullOrWhiteSpace(GlobalModalOptions.OverlayCustomClass))
-            return GlobalModalOptions.OverlayCustomClass;
-
-        return string.Empty;
+        return !string.IsNullOrWhiteSpace(GlobalModalOptions.OverlayCustomClass) ? GlobalModalOptions.OverlayCustomClass : string.Empty;
     }
 
     private bool SetActivateFocusTrap()
@@ -321,10 +304,7 @@ public partial class BlazoredModalInstance : IDisposable
         if (Options.ActivateFocusTrap.HasValue)
             return Options.ActivateFocusTrap.Value;
 
-        if (GlobalModalOptions.ActivateFocusTrap.HasValue)
-            return GlobalModalOptions.ActivateFocusTrap.Value;
-
-        return true;
+        return !GlobalModalOptions.ActivateFocusTrap.HasValue || GlobalModalOptions.ActivateFocusTrap.Value;
     }
 
     private async Task HandleBackgroundClick()
@@ -342,7 +322,7 @@ public partial class BlazoredModalInstance : IDisposable
         }
     }
 
-    void IDisposable.Dispose() => Parent.OnModalClosed -= AttemptFocus;
+    public void Dispose() => Parent.OnModalClosed -= AttemptFocus;
     
     private void ListenToBackgroundClick()=> _listenToBackgroundClicks = true;
 

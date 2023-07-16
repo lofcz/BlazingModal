@@ -98,7 +98,7 @@
 
     internal Task DismissInstance(Guid id, ModalResult result)
     {
-        var reference = GetModalReference(id);
+        ModalReference? reference = GetModalReference(id);
         return DismissInstance(reference, result);
     }
 

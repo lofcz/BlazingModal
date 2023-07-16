@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     
-    <Authors>Chris Sainty, Matěj "lofcz" Štágl</Authors>
+    <Authors>Chris Sainty, Matěj "lofcz" Štágl, Blazored / Modal contributors</Authors>
     <Company></Company>
     <Copyright>Copyright 2021 (c) Chris Sainty. All rights reserved.</Copyright>
     
@@ -14,7 +13,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
     <!-- NuGet settings -->
-    <PackageId>BlazorModalExperimental</PackageId>
+    <PackageId>Lofcz.Forks.BlazoredModal</PackageId>
     <PackageTags>Blazored;Blazor;Razor;Components;Modal;Dialogue;ASP.NET Core;CSharp;Web</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Blazored/Modal</PackageProjectUrl>
@@ -26,6 +25,9 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFrameworks>net7.0;net7.0-windows</TargetFrameworks>
+    <LangVersion>preview</LangVersion>
+    <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
