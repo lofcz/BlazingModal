@@ -43,7 +43,7 @@
 
 @code {
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = null!;
 
     void PositionCenter()
     {
@@ -52,7 +52,7 @@
 
     void PositionCustom(ModalPosition position)
     {
-        var options = new ModalOptions { Position = position };
+        ModalOptions? options = new ModalOptions { Position = position };
 
         if (position == ModalPosition.Custom)
             options.PositionCustomClass = "my-custom-position";

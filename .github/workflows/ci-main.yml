@@ -7,7 +7,7 @@ on:
     types: [published]
 
 env:
-  NETCORE_VERSION: "6.0.x"
+  NETCORE_VERSION: "8.0.x"
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   PROJECT_NAME: Modal
@@ -34,7 +34,7 @@ jobs:
         run: dotnet restore
 
       - name: Build Modal
-        run: dotnet build -c Release --no-restore src/Blazored.$PROJECT_NAME/Blazored.$PROJECT_NAME.csproj
+        run: dotnet build -c Release --no-restore src/Blazing.$PROJECT_NAME/Blazing.$PROJECT_NAME.csproj
 
       - name: Test
         run: dotnet test -c Release --no-restore --verbosity normal
@@ -58,7 +58,7 @@ jobs:
           echo Version: $VERSION
           VERSION="${VERSION//v}"
           echo Clean Version: $VERSION
-          dotnet pack -v normal -c Release --include-symbols --include-source -p:PackageVersion=$VERSION -o nupkg src/Blazored.$PROJECT_NAME/Blazored.$PROJECT_NAME.csproj
+          dotnet pack -v normal -c Release --include-symbols --include-source -p:PackageVersion=$VERSION -o nupkg src/Blazing.$PROJECT_NAME/Blazing.$PROJECT_NAME.csproj
       
       - name: Push to NuGet Feed
         run: dotnet nuget push ./nupkg/*.nupkg --source $NUGET_FEED --api-key $NUGET_KEY --skip-duplicate

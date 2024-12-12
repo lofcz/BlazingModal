@@ -7,7 +7,7 @@
 
 @code {
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    [CascadingParameter] BlazingModalInstance BlazoredModal { get; set; } = null!;
 
     async Task Close() => await BlazoredModal.CloseAsync(ModalResult.Ok(true));
     async Task Cancel() =>await BlazoredModal.CancelAsync();

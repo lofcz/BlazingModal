@@ -7,8 +7,7 @@
 <p>
     The modal has a default width. However, this can be changed by setting the <code>Size</code> option.
 </p>
-<p>
-    There are 5 different sizes available:
+<div>
     <ul>
         <li>Small - 300px</li>
         <li>Medium - 500px (default)</li>
@@ -16,7 +15,7 @@
         <li>Extra Large - 1140px</li>
         <li>Custom - Provide your own class, via the <code>SizeCustomClass</code> parameter, which sets the width</li>
     </ul>
-</p>
+</div>
 
 <div class="card mb-4">
     <h5 class="card-header">Setting on a per modal basis</h5>
@@ -36,7 +35,7 @@
     <div class="card-body">
         <p class="card-text">
             <code>
-                @("<CascadingBlazoredModal Size=\"ModalSize.Large\" />")
+                @("<CascadingBlazingModal Size=\"ModalSize.Large\" />")
             </code>
         </p>
     </div>
@@ -51,7 +50,7 @@
 
 @code {
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = null!;
 
     void DefaultSize()
     {
@@ -60,7 +59,7 @@
 
     void SetSize(ModalSize size)
     {
-        var options = new ModalOptions { Size = size };
+        ModalOptions? options = new ModalOptions { Size = size };
 
         if (size == ModalSize.Custom)
             options.SizeCustomClass = "my-custom-size";

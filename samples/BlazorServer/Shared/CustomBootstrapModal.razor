@@ -1,4 +1,6 @@
-﻿<div class="modal fade show d-block" tabindex="-1" role="dialog">
+﻿@using BlazingModal
+@using BlazingModal.Services
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
     <div class="modal-backdrop fade show" @onclick="Cancel"></div>
     <div class="modal-dialog" style="z-index: 1050"> <!-- Pop it above the backdrop -->
         <div class="modal-content">
@@ -20,7 +22,7 @@
 
 @code {
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    [CascadingParameter] BlazingModalInstance BlazoredModal { get; set; } = null!;
 
     [Parameter] public string? Message { get; set; }
 

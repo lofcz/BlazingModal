@@ -1,0 +1,56 @@
+@code {
+    private ElementReference container;
+    private ElementReference startFirst;
+    private ElementReference startSecond;
+    private ElementReference endFirst;
+    private ElementReference endSecond;
+    private bool shiftPressed;
+
+    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public bool IsActive { get; set; }
+
+    protected override bool ShouldRender() => false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await startFirst.FocusAsync();
+        }
+    }
+
+    internal async Task SetFocus()
+        => await startFirst.FocusAsync();
+
+    private async Task FocusStartAsync(FocusEventArgs args)
+    {
+        if (!shiftPressed)
+        {
+            await startFirst.FocusAsync();
+        }
+    }
+
+    private async Task FocusEndAsync(FocusEventArgs args)
+    {
+        if (shiftPressed)
+        {
+            await endFirst.FocusAsync();
+        }
+    }
+
+    private void HandleKeyPresses(KeyboardEventArgs args)
+    {
+        if (args.Key is "Tab")
+        {
+            shiftPressed = args.ShiftKey;
+        }
+    }
+}
+
+<div class="BlazingModal-focus-trap" @ref="container" @onkeydown="HandleKeyPresses" @onkeyup="HandleKeyPresses">
+    <div tabindex="@(IsActive ? 0 : -1)" @ref="startSecond" @onfocus="FocusEndAsync"></div>
+    <div tabindex="@(IsActive ? 0 : -1)" @ref="startFirst" @onfocus="FocusEndAsync"></div>
+    @ChildContent
+    <div tabindex="@(IsActive ? 0 : -1)" @ref="endFirst" @onfocus="FocusStartAsync"></div>
+    <div tabindex="@(IsActive ? 0 : -1)" @ref="endSecond" @onfocus="FocusStartAsync"></div>
+</div>

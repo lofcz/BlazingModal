@@ -1,13 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Blazored.Modal\Blazored.Modal.csproj" />
+    <ProjectReference Include="..\..\src\BlazingModal\BlazingModal.csproj" />
+    <ProjectReference Include="..\..\src\BlazorModal\BlazorModal.csproj" />
   </ItemGroup>
 
 </Project>

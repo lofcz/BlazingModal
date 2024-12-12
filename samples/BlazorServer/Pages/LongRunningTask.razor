@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<p>Result: @_result;</p>
+<p>Result: @result;</p>
 
 <button @onclick="ShowModal" class="btn btn-primary">Long-running task default ModalResult</button>
 <button @onclick="ShowOkResultModal" class="btn btn-primary">Long-running task OK result</button>
@@ -30,66 +30,66 @@
 
 @code {
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = null!;
 
-    string? _result;
+    string? result;
 
     async Task ShowModal()
     {
-        var options = new ModalOptions
+        ModalOptions? options = new ModalOptions
         {
             HideCloseButton = false,
             DisableBackgroundCancel = true,
             HideHeader = true
         };
-        var loading = Modal.Show<Loading>(string.Empty, options);
+        IModalReference? loading = Modal.Show<Loading>(string.Empty, options);
 
         await Task.Delay(5000);
 
         loading.Close();
-        var result = await loading.Result;
+        ModalResult? result = await loading.Result;
         if (result.DataType == typeof(object))
-            _result = "Modal returned with default ModalResult";
+            this.result = "Modal returned with default ModalResult";
 
         StateHasChanged();
     }
 
     async Task ShowOkResultModal()
     {
-        var options = new ModalOptions
+        ModalOptions? options = new ModalOptions
         {
             HideCloseButton = false,
             DisableBackgroundCancel = true,
             HideHeader = true
         };
-        var loading = Modal.Show<Loading>(string.Empty, options);
+        IModalReference? loading = Modal.Show<Loading>(string.Empty, options);
 
         await Task.Delay(5000);
 
         loading.Close(ModalResult.Ok("Closed with OK result"));
-        var result = await loading.Result;
+        ModalResult? result = await loading.Result;
         if (result.Data is not null && result.DataType == typeof(string))
-            _result = result.Data.ToString()!;
+            this.result = result.Data.ToString()!;
 
         StateHasChanged();
     }
 
     async Task ShowCancelModal()
     {
-        var options = new ModalOptions
+        ModalOptions? options = new ModalOptions
         {
             HideCloseButton = false,
             DisableBackgroundCancel = true,
             HideHeader = true
         };
-        var loading = Modal.Show<Loading>(string.Empty, options);
+        IModalReference? loading = Modal.Show<Loading>(string.Empty, options);
 
         await Task.Delay(5000);
 
         loading.Close(ModalResult.Cancel());
-        var result = await loading.Result;
+        ModalResult? result = await loading.Result;
         if (result.Cancelled)
-            _result = "Closed with Cancelled result";
+            this.result = "Closed with Cancelled result";
 
         StateHasChanged();
     }

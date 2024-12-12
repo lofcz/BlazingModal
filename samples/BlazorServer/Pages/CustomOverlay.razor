@@ -36,11 +36,11 @@
 
 @code {
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = null!;
 
     void ShowModalCustomOverlay()
     {
-        var options = new ModalOptions { OverlayCustomClass = "custom-modal-overlay" };
+        ModalOptions? options = new ModalOptions { OverlayCustomClass = "custom-modal-overlay" };
         Modal.Show<Confirm>("Custom Overlay", options);
     }
 

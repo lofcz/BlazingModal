@@ -4,8 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Custom rules
-src/Blazored.Modal/wwwroot/*.js
-src/Blazored.Modal/wwwroot/*.map
+src/BlazingModal/wwwroot/*.js
+src/BlazingModal/wwwroot/*.map
 .DS_Store
 
 # User-specific files

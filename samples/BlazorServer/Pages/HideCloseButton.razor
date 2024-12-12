@@ -37,7 +37,7 @@
 
 @code {
 
-    [CascadingParameter] public IModalService Modal { get; set; } = default!;
+    [CascadingParameter] public IModalService Modal { get; set; } = null!;
 
     void CloseButtonShown()
     {
@@ -46,7 +46,7 @@
 
     void CloseButtonHidden()
     {
-        var options = new ModalOptions { HideCloseButton = true };
+        ModalOptions? options = new ModalOptions { HideCloseButton = true };
         Modal.Show<Confirm>("Hiding Close Button", options);
     }
 }

@@ -9,14 +9,14 @@
 
 @code {
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; } = default!;
+    [CascadingParameter] BlazingModalInstance BlazoredModal { get; set; } = null!;
 
     async Task Yes()
     {
-        var options = new ModalOptions { AnimationType = ModalAnimationType.FadeInOut };
+        ModalOptions? options = new ModalOptions { AnimationType = ModalAnimationType.FadeInOut };
 
-        var confirmationModal = ModalService.Show<Confirm>("Second Modal", options);
-        var result = await confirmationModal.Result;
+        IModalReference? confirmationModal = ModalService.Show<Confirm>("Second Modal", options);
+        ModalResult? result = await confirmationModal.Result;
 
         if (result.Cancelled)
             return;
